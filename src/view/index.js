@@ -152,7 +152,7 @@ Index.propTypes = {
 };
 
 Index.defaultProps = {
-    query: 'Pwcong'
+    query: ''
 };
 
 export default Index;

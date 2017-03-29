@@ -1,6 +1,8 @@
 # let-me-help-you
 有问题么？懒得自己找？我帮你百度吧。
 
+[Demo](http://pwcong.me/let-me-help-you/index.html?query=Pwcong)
+
 # Usage
 1. 部署
 2. 浏览器访问 `http(s)://host(:port)?query=搜索关键字 `

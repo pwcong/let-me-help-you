@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Index from './view/index';
+
+import { formatQueryParams } from './utils/query-utils';
+
+const params = formatQueryParams(window.location.search);
+
 ReactDOM.render(
-    <h1>Hello World</h1>,
+    <Index query={params.q}/>,
     document.getElementById('app')
 );

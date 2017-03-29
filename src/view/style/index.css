@@ -1,0 +1,60 @@
+:local .root{
+    position: relative;
+    top: -64px;
+    width: 100%;
+}
+
+:local .logo{
+    width: 100%;
+    text-align: center;
+}
+
+:local .logo img{
+    width: 450px;
+    max-width: 100%;
+}
+
+:local .tools{
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+:local .tools input{
+    width: 60%;
+    font-size: 16px;
+    height: 40px;
+    padding-left: 8px;
+}
+:local .tools button{
+    height: 46px;
+    border: none;
+    outline: none;
+    background-color: #0093CC;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+:local .tools button:hover{
+    background-color: #4AACE6;
+}
+:local .tools button:active{
+    background-color: #008BC3;
+}
+
+:local .cursor{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+    width: 22px;
+    height: 22px;
+
+}

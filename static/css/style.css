@@ -1,18 +1,3 @@
 body {
     font-family: 'Microsoft YaHei', sans-serif;
-
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    top: 0px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
-#app{
-    width: 100%;
 }

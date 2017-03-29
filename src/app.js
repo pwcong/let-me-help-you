@@ -11,3 +11,4 @@ ReactDOM.render(
     <Index query={params.query}/>,
     document.getElementById('app')
 );
+

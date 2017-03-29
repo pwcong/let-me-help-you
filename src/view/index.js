@@ -12,7 +12,8 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            input: ''
+            input: '',
+            inputState: false
         };
 
         this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
@@ -21,6 +22,7 @@ class Index extends Component {
 
     handleSearchButtonClick(e){
 
+        redirectTo(`https://www.baidu.com/s?wd=${this.props.query}`);
 
     }
 
@@ -32,24 +34,65 @@ class Index extends Component {
 
     componentDidMount(){
 
+        let ctx = this;
+
+        // 等待0.1秒，让浏览器完成界面渲染。
         setTimeout(() => {
 
-            if(this.props.query){
+            if(ctx.props.query)
 
-                let searchInput = $(this.refs.searchInput);
-                let cursor = $(this.refs.cursor);
+                this.startWorking(ctx);
+            
+        }, 100);
+    }
+
+    startWorking(ctx){
+
+        let searchInput = $(ctx.refs.searchInput);
+        let searchButton = $(ctx.refs.searchButton);
+
+        let cursor = $(this.refs.cursor);
+
+        cursor.animate({
+            left: searchInput.offset().left + 8,
+            top: searchInput.offset().top + searchInput.height() / 2
+        }, 1600, () => {
+
+            cursor.hide();
+
+            Promise.all(ctx.props.query.split('').map((c, i) => {
+                return new Promise(resolve => {
+
+                    setTimeout(() => {
+                        resolve(c);
+                    }, 300 * i);
+
+                }).then(res => {
+
+                    ctx.setState({
+                        input: ctx.state.input + res
+                    });
+
+                });
+            })).then(() => {
+
+                cursor.show();
 
                 cursor.animate({
-                    left: searchInput.offset().left + 8,
-                    top: searchInput.offset().top + searchInput.height() / 2
-                }, 2000, () => {
+                    left: searchButton.offset().left + searchButton.width() / 2,
+                    top: searchButton.offset().top + searchButton.height() / 2
 
-                    cursor.hide();
+                }, 1800, () => {
+
+                    redirectTo(`https://www.baidu.com/s?wd=${ctx.props.query}`);
 
                 });
 
-            }
-        }, 100);
+            });
+
+        });
+
+
     }
 
 
@@ -87,9 +130,21 @@ class Index extends Component {
                     </button>
                 </div>
 
+                <div className={style.tips}>
+                    <p>
+                        草泥马不会百度吗？要我帮你吗？
+                    </p>
+                </div>
+
             </div>
         );
     }
+}
+
+function redirectTo(url){
+
+    window.location.href = url;
+
 }
 
 Index.propTypes = {

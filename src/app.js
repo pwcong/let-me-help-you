@@ -8,6 +8,6 @@ import { formatQueryParams } from './utils/query-utils';
 const params = formatQueryParams(window.location.search);
 
 ReactDOM.render(
-    <Index query={params.q}/>,
+    <Index query={params.query}/>,
     document.getElementById('app')
 );

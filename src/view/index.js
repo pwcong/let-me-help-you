@@ -51,7 +51,7 @@ class Index extends Component {
             previewable: false
         });
 
-        let url_long = window.location.href.split('?')[0] + '?query=' + encodeURI(ctx.state.input);
+        let url_long = window.location.href.split('?')[0] + '?query=' + encodeURI(ctx.state.input.replace(' ',''));
 
         $.get(SINA_SHORTEN+`?showapi_appid=${APPID}&showapi_sign=${SECRET}&url_long=${url_long}`, res => {
 

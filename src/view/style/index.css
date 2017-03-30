@@ -25,6 +25,8 @@
 }
 
 :local .tools input{
+    margin-top: 16px;
+    margin-bottom: 16px;
     width: 60%;
     font-size: 16px;
     height: 40px;

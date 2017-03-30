@@ -186,19 +186,22 @@ class Index extends Component {
                         value={this.state.input} 
                         type="text" 
                         placeholder="这里输入要搜索的关键字"/>
-                    <button
-                        ref="searchButton"
-                        onClick={this.handleSearchButtonClick}>
-                        百度一下
-                    </button>
-                    <button
-                        style={{
-                            marginLeft: '2px'
-                        }}
-                        onClick={this.handleGetShortURL}
-                        >
-                        生成地址
-                    </button>
+
+                    <div>
+                        <button
+                            ref="searchButton"
+                            onClick={this.handleSearchButtonClick}>
+                            百度一下
+                        </button>
+                        <button
+                            style={{
+                                marginLeft: '2px'
+                            }}
+                            onClick={this.handleGetShortURL}
+                            >
+                            生成地址
+                        </button>
+                    </div>
                 </div>
 
                 <div className={style.tips}>

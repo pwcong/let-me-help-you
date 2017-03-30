@@ -73,8 +73,8 @@
 }
 
 :local .tools button:hover{
-    background-color: #4AACE6;
+    background-color: #317ef3;
 }
 :local .tools button:active{
-    background-color: #008BC3;
+    background-color: #2A79ED;
 }

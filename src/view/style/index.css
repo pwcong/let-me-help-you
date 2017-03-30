@@ -36,7 +36,7 @@
     height: 46px;
     border: none;
     outline: none;
-    background-color: #0093CC;
+    background-color: #3388ff;
     font-size: 14px;
     color: white;
     cursor: pointer;
@@ -44,10 +44,10 @@
 }
 
 :local .tools button:hover{
-    background-color: #4AACE6;
+    background-color: #317ef3;
 }
 :local .tools button:active{
-    background-color: #008BC3;
+    background-color: #2A79ED;
 }
 
 

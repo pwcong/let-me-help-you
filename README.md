@@ -1,7 +1,11 @@
+![demo](https://ooo.0o0.ooo/2017/03/30/58dc959fabc73.png)
+
 # let-me-help-you
 有问题么？懒得自己找？我帮你百度吧。
 
-[Demo](http://pwcong.me/let-me-help-you/index.html?query=Pwcong)
+[带参数的Demo](http://pwcong.me/let-me-help-you/index.html?query=Pwcong)
+
+[不带参数Demo](http://pwcong.me/let-me-help-you/index.html)
 
 # Usage
 1. 部署

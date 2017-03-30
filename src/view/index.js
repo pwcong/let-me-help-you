@@ -31,7 +31,7 @@ class Index extends Component {
 
     handleSearchButtonClick(e){
 
-        redirectTo(BAIDU_SEARCH + this.props.query);
+        redirectTo(BAIDU_SEARCH + this.state.input);
 
     }
 

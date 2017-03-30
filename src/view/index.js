@@ -18,7 +18,6 @@ class Index extends Component {
 
         this.state = {
             input: '',
-            inputState: false,
             tips: '',
             modalActive: false,
             modalContent: '',
@@ -52,7 +51,9 @@ class Index extends Component {
             previewable: false
         });
 
-        $.get(SINA_SHORTEN+`?showapi_appid=${APPID}&showapi_sign=${SECRET}&url_long=${window.location.href}`, res => {
+        let url_long = window.location.href.split('?')[0] + '?query=' + encodeURI(ctx.state.input);
+
+        $.get(SINA_SHORTEN+`?showapi_appid=${APPID}&showapi_sign=${SECRET}&url_long=${url_long}`, res => {
 
             if(res.showapi_res_code === 0 && res.showapi_res_body.url_short){
 

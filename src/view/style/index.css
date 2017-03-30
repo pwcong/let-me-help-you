@@ -31,11 +31,13 @@
     padding-left: 8px;
 }
 :local .tools button{
+    padding-left: 8px;
+    padding-right: 8px;
     height: 46px;
     border: none;
     outline: none;
     background-color: #0093CC;
-    font-size: 18px;
+    font-size: 14px;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -48,6 +50,7 @@
     background-color: #008BC3;
 }
 
+
 :local .cursor{
     position: fixed;
     left: 0px;
@@ -55,7 +58,7 @@
     z-index: 999;
     width: 22px;
     height: 22px;
-
+    display: none;
 }
 
 :local .tips{

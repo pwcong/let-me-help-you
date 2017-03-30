@@ -1,10 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 
-import { getTop, getLeft } from '../utils/element-utils';
-
 import style from './style/index.css';
 
-// https://www.baidu.com/s?wd=
+import Modal from '../component/Modal';
+
+import { 
+    BAIDU_SEARCH,
+    SINA_SHORTEN,
+    APPID,
+    SECRET
+} from '../config';
 
 class Index extends Component {
 
@@ -13,22 +18,54 @@ class Index extends Component {
 
         this.state = {
             input: '',
-            inputState: false
+            inputState: false,
+            tips: '',
+            modalActive: false,
+            modalContent: '',
+            previewable: false
         };
 
         this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this);
         this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+        this.handleGetShortURL = this.handleGetShortURL.bind(this);
     }
 
     handleSearchButtonClick(e){
 
-        redirectTo(`https://www.baidu.com/s?wd=${this.props.query}`);
+        redirectTo(BAIDU_SEARCH + this.props.query);
 
     }
 
     handleSearchInputChange(e){
         this.setState({
             input: e.target.value
+        });
+    }
+
+    handleGetShortURL(e){
+
+        let ctx = this;
+
+        ctx.setState({
+            modalActive: true,
+            modalContent: '正在生成中',
+            previewable: false
+        });
+
+        $.get(SINA_SHORTEN+`?showapi_appid=${APPID}&showapi_sign=${SECRET}&url_long=${window.location.href}`, res => {
+
+            if(res.showapi_res_code === 0 && res.showapi_res_body.url_short){
+
+                ctx.setState({
+                    modalContent: res.showapi_res_body.url_short,
+                    previewable: true
+                });
+            }else{
+                ctx.setState({
+                    modalContent: '地址生成失败'
+                });
+            }
+
         });
     }
 
@@ -43,7 +80,7 @@ class Index extends Component {
 
                 this.startWorking(ctx);
             
-        }, 100);
+        }, 1000);
     }
 
     startWorking(ctx){
@@ -53,10 +90,20 @@ class Index extends Component {
 
         let cursor = $(this.refs.cursor);
 
+        ctx.setState({
+            tips: '有问题吗？'
+        });
+
+        cursor.show();
+
         cursor.animate({
             left: searchInput.offset().left + 8,
             top: searchInput.offset().top + searchInput.height() / 2
         }, 1600, () => {
+
+            ctx.setState({
+                tips: '百度一下就这么难吗？'
+            });
 
             cursor.hide();
 
@@ -84,7 +131,7 @@ class Index extends Component {
 
                 }, 1800, () => {
 
-                    redirectTo(`https://www.baidu.com/s?wd=${ctx.props.query}`);
+                    redirectTo(BAIDU_SEARCH + ctx.props.query);
 
                 });
 
@@ -101,6 +148,21 @@ class Index extends Component {
         return (
             <div className={style.root}>
                 
+                <Modal 
+                    content={this.state.modalContent}
+                    positiveLabel="预览"
+                    positiveEnable={this.state.previewable}
+                    onPositiveButtonClick={(content) => {
+                        redirectTo(content);
+                    }}
+                    negativeLabel="知道了"
+                    onNegativeButtonClick={() => {
+                        this.setState({
+                            modalActive: false
+                        });
+                    }}
+                    active={this.state.modalActive}/>
+
                 <div 
                     ref="cursor"
                     className={style.cursor}
@@ -128,11 +190,19 @@ class Index extends Component {
                         onClick={this.handleSearchButtonClick}>
                         百度一下
                     </button>
+                    <button
+                        style={{
+                            marginLeft: '2px'
+                        }}
+                        onClick={this.handleGetShortURL}
+                        >
+                        生成地址
+                    </button>
                 </div>
 
                 <div className={style.tips}>
                     <p>
-                        草泥马不会百度吗？要我帮你吗？
+                        {this.state.tips}
                     </p>
                 </div>
 

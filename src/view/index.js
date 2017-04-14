@@ -4,12 +4,9 @@ import style from './style/index.css';
 
 import Modal from '../component/Modal';
 
-import { 
-    BAIDU_SEARCH,
-    SINA_SHORTEN,
-    APPID,
-    SECRET
-} from '../config';
+import {
+    getShortenURL
+} from '../utils/shorten-utils'
 
 class Index extends Component {
 
@@ -53,21 +50,21 @@ class Index extends Component {
 
         let url_long = window.location.href.split('?')[0] + '?query=' + encodeURI(ctx.state.input.replace(' ',''));
 
-        $.get(SINA_SHORTEN+`?showapi_appid=${APPID}&showapi_sign=${SECRET}&url_long=${url_long}`, res => {
-
-            if(res.showapi_res_code === 0 && res.showapi_res_body.url_short){
-
+        getShortenURL(
+            url_long,
+            shortenUrl => {
                 ctx.setState({
-                    modalContent: res.showapi_res_body.url_short,
+                    modalContent: shortenUrl,
                     previewable: true
                 });
-            }else{
+            },
+            () => {
                 ctx.setState({
                     modalContent: '地址生成失败'
                 });
-            }
+            } 
+        );
 
-        });
     }
 
     componentDidMount(){

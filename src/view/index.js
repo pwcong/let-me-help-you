@@ -5,6 +5,7 @@ import style from './style/index.css';
 import Modal from '../component/Modal';
 
 import {
+    BAIDU_SEARCH,
     getShortenURL
 } from '../utils/shorten-utils'
 
